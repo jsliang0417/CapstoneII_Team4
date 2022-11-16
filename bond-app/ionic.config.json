@@ -1,7 +1,0 @@
-{
-  "name": "Bond App",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
-}
