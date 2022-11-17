@@ -46,7 +46,7 @@ class RecordAudioProvider extends ChangeNotifier{
     print('Audio file path: $_audioFilePath');
 
     _isRecording = false;
-    _afterRecordingFilePath = _audioFilePath ?? '';
+    _afterRecordingFilePath = _audioFilePath!;
     notifyListeners();
   }
 }

@@ -17,7 +17,11 @@ class StorageManagement {
 
   static get getAudioDir async => await makeDirectory(dirName: 'recordings');
 
-  static String createRecordAudioPath(
-      {required String dirPath, required String fileName}) =>
-      """$dirPath${fileName.substring(0, min(fileName.length, 100))}_${DateTime.now()}.aac""";
+
+  //val timeStamp = SimpleDateFormat("yyyyMMDD_HHmmss", Locale.US).format(Date())
+  //val imageFileName = "JPEG_${timeStamp}_"
+  static String createRecordAudioPath({required String dirPath, required String fileName}) {
+    String timeStamp = DateTime.now().toString().replaceAll(" ", "_");
+    return """$dirPath${fileName.substring(0, min(fileName.length, 100))}_${timeStamp}.aac""";
+  }
 }
