@@ -15,16 +15,52 @@ class EntryRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => RecordAudioProvider()),
-        ChangeNotifierProvider(create: (_) => PlayAudioProvider()),
-      ],
-      child: const MaterialApp(
+    // return MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(create: (_) => RecordAudioProvider()),
+    //     ChangeNotifierProvider(create: (_) => PlayAudioProvider()),
+    //   ],
+      return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Record and Play',
-        home: RecordAndPlayScreen(),
-      ),
-    );
+        // theme: ThemeData(
+          //   tabBarTheme: const TabBarTheme(
+        //     // labelColor: Colors.red
+        //   // )
+        // ),
+        home: DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            appBar: AppBar(
+              bottom: const TabBar(
+                tabs: [
+                  Tab(icon: Icon(Icons.library_music_rounded)),
+                  Tab(icon: Icon(Icons.favorite_sharp)),
+                  Tab(icon: Icon(Icons.settings)),
+                ],
+              ),
+              title: const Text('BOND'),
+            ),
+            body: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                Icon(Icons.directions_bike),
+                MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(create: (_) => RecordAudioProvider()),
+                    ChangeNotifierProvider(create: (_) => PlayAudioProvider()),
+                  ],
+                  child: const MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    title: 'BOND',
+                    home: RecordAndPlayScreen(),
+                  ),
+                ),
+                Icon(Icons.settings),
+              ],
+            ),
+          ),
+        ),
+      );
+    // );
   }
 }
