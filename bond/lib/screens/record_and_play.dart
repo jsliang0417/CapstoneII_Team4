@@ -38,19 +38,6 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/2489988/pexels-photo-2489988.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -58,15 +45,14 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
             _recordProvider.recordedFilePath.isEmpty
                 ? _recordHeading()
                 : _playAudioHeading(),
-            const SizedBox(height: 40),
+            const SizedBox(height: 80),
             _recordProvider.recordedFilePath.isEmpty
                 ? _recordingSection()
                 : _audioPlayingSection(),
-            if (_recordProvider.recordedFilePath.isNotEmpty &&
-                !_playProvider.isSongPlaying)
-              const SizedBox(height: 40),
-            if (_recordProvider.recordedFilePath.isNotEmpty &&
-                !_playProvider.isSongPlaying)
+            // if (_recordProvider.recordedFilePath.isNotEmpty &&
+            //     !_playProvider.isSongPlaying)
+            //   const SizedBox(height: 40),
+            if (_recordProvider.recordedFilePath.isNotEmpty)
               _resetButton(),
           ],
         ),
@@ -79,7 +65,7 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
       child: Text(
         'Record Audio',
         style: TextStyle(
-            fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
+            fontSize: 18, fontWeight: FontWeight.w700, color: Colors.black),
       ),
     );
   }
@@ -89,7 +75,7 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
       child: Text(
         'Play Audio',
         style: TextStyle(
-            fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
+            fontSize: 18, fontWeight: FontWeight.w700, color: Colors.black),
       ),
     );
   }
@@ -104,7 +90,7 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
         onTap: () async => await _recordProviderWithoutListener.stopRecording(),
         child: RippleAnimation(
           repeat: true,
-          color: const Color(0xff4BB543),
+          color: Colors.grey,
           minRadius: 40,
           ripplesCount: 6,
           child: _commonIconSection(),
@@ -142,7 +128,7 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
+        color: Colors.white24,
       ),
       child: Row(
         children: [
@@ -166,7 +152,7 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
       },
       icon: Icon(
           _playProvider.isSongPlaying ? Icons.pause : Icons.play_arrow_rounded),
-      color: const Color(0xff4BB543),
+      color: Colors.green,
       iconSize: 30,
     );
   }
@@ -181,7 +167,7 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
           child: LinearPercentIndicator(
             percent: _playProvider.currLoadingStatus,
             backgroundColor: Colors.black26,
-            progressColor: const Color(0xff4BB543),
+            progressColor: Colors.blue,
           ),
         ));
   }
@@ -197,7 +183,7 @@ class _RecordAndPlayScreenState extends State<RecordAndPlayScreen> {
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           decoration: BoxDecoration(
-            color: Colors.redAccent,
+            color: Colors.red,
             borderRadius: BorderRadius.circular(10),
           ),
           child: const Text(
