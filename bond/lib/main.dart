@@ -1,3 +1,5 @@
+import 'package:bond/providers/library_provider.dart';
+import 'package:bond/screens/library.dart';
 import 'package:bond/screens/record_and_play.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,8 +44,19 @@ class EntryRoot extends StatelessWidget {
             ),
             body: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
+              //tab 1
               children: [
-                Icon(Icons.directions_bike),
+                MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(create: (_) => LibraryProvider()),
+                  ],
+                  child: const MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    title: 'BOND',
+                    home: LibraryScreen(),
+                  ),
+                ),
+                //tab 2
                 MultiProvider(
                   providers: [
                     ChangeNotifierProvider(create: (_) => RecordAudioProvider()),
@@ -55,6 +68,7 @@ class EntryRoot extends StatelessWidget {
                     home: RecordAndPlayScreen(),
                   ),
                 ),
+                //tab 3
                 Icon(Icons.settings),
               ],
             ),
